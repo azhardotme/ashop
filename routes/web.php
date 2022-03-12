@@ -23,5 +23,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
      Route::get('/add-category',[CategoryController::class,'addCategory'])->name('addCategory');
      Route::get('/all-category',[CategoryController::class,'allCategory'])->name('allCategory');
      Route::post('/insert-category',[CategoryController::class,'insertCategory'])->name('insertCategory');
-
+     Route::get('/edit-category/{id}',[CategoryController::class,'editCategory'])->name('editCategory');
+     Route::put('/update-category/{id}',[CategoryController::class,'updateCategory'])->name('updateCategory');
+     
  });
