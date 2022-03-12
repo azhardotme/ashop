@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+
 use App\Models\Category;
+
 use Session;
 class CategoryController extends Controller
 {
@@ -77,5 +79,20 @@ class CategoryController extends Controller
         $category->meta_description = $request->input('meta_description');
         $category->update();
         return redirect('/all-category')->with('status','Category Updated Successfully!');
+    }
+
+    public function deleteCategory($id)
+    {
+        $category = Category::find($id);
+        if($category->image)
+        {
+            $path = 'assets/uploads/category/'.$category->image;
+            if(File::exists($path))
+            {
+                File::delete($path);
+            } 
+        }
+        $category->delete();
+        return redirect('/all-category')->with('status','Category Deleted Successfully!');
     }
 }

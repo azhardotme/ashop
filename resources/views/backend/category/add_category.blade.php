@@ -7,9 +7,7 @@
                 <div class="card-header">
                     <h2>Add Category</h2>
                 </div>
-                @if(session('status'))
-                <h6 class="alert alert-success">{{ session('status') }}</h6>
-                @endif
+             
                 <div class="card-body">
                     <form action="{{url('insert-category')}}" method="POST" enctype="multipart/form-data">
                         @csrf
