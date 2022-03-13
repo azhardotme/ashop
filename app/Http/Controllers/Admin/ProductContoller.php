@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use App\Models\Category;
 use App\Models\Product;
 class ProductContoller extends Controller
@@ -34,8 +35,8 @@ class ProductContoller extends Controller
             'selling_price' => ['required'],
             'tax' => ['required'],
             'qty' => ['required'],
-            'status' => ['required'],
-            'trending' => ['required'],
+            // 'status' => ['required'],
+            // 'trending' => ['required'],
             'meta_title' => ['required'],
             'meta_keywords' => ['required'],
             'meta_description' => ['required'],
@@ -69,10 +70,64 @@ class ProductContoller extends Controller
     }
 
 
-    public function editCategory($id)
+    public function edit($id)
     {
         $category = Category::find($id);
-        return view('backend.category.edit_category',compact('category'));
+        $products = Product::find($id);
+        $category = Category::all();
+        return view('backend.product.edit',compact('products','category'));
+    }
+
+    
+    public function update(Request $request,$id)
+    {
+        $product = Product::find($id);
+        if($request->hasFile('image'))
+        {
+            $path = 'assets/uploads/products/'.$product->image;
+            if(File::exists($path))
+            {
+                File::delete($path);
+            }
+            $file = $request->file('image');
+            $ext = $file->getClientOriginalExtension();
+            $filename = time().'.'.$ext;
+            $file->move('assets/uploads/products/',$filename);
+            $product->image = $filename;
+
+        }
+        // $product->cate_id = $request->input('cate_id');
+        $product->name = $request->input('name');
+        $product->slug = $request->input('slug');
+        $product->small_description = $request->input('small_description');
+        $product->description = $request->input('description');
+        $product->original_price = $request->input('original_price');
+        $product->selling_price = $request->input('selling_price');
+        $product->tax = $request->input('tax');
+        $product->qty = $request->input('qty');
+        $product->status = $request->input('status') == TRUE ? '1':'0';
+        $product->trending = $request->input('trending') == TRUE ? '1' :'0';
+        $product->meta_title = $request->input('meta_title');
+        $product->meta_keywords = $request->input('meta_keywords');
+        $product->meta_description = $request->input('meta_description');
+        $product->update();
+        return redirect('/all-product')->with('status','Product updated Successfully!');
+    }
+
+
+    public function delete($id)
+    {
+        $product = Product::find($id);
+        if($product->image)
+        {
+            $path = 'assets/uploads/products/'.$product->image;
+            if(File::exists($path))
+            {
+                File::delete($path);
+            } 
+        }
+        $product->delete();
+        return redirect('/all-product')->with('status','Product Deleted Successfully!');
     }
 
 }
