@@ -10,5 +10,5 @@
 
     <!--common script for all pages-->
     <script src="{{asset('backend')}}/js/common-scripts.js"></script>
-
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
