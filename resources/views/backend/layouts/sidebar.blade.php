@@ -24,18 +24,12 @@
             <li class="sub-menu">
                 <a href="javascript:;">
                     <i class="fa fa-book"></i>
-                    <span>UI Elements</span>
+                    <span>Product</span>
                 </a>
                 <ul class="sub">
-                    <li><a  href="general.html">General</a></li>
-                    <li><a  href="buttons.html">Buttons</a></li>
-                    <li><a  href="modal.html">Modal</a></li>
-                    <li><a  href="toastr.html">Toastr Notifications</a></li>
-                    <li><a  href="widget.html">Widget</a></li>
-                    <li><a  href="slider.html">Slider</a></li>
-                    <li><a  href="nestable.html">Nestable</a></li>
-                    <li><a  href="tree.html">Tree View</a></li>
-                    <li><a  href="font_awesome.html">Font Awesome</a></li>
+                    <li><a  href="{{route('product.create')}}">Add Product</a></li>
+                    <li><a  href="{{route('product.index')}}">All Product</a></li>
+                   
                 </ul>
             </li>
 
