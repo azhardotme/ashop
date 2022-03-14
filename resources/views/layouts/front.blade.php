@@ -17,10 +17,10 @@
     <div class="container">
         @include('layouts.frontnav')
         <div id="app">
-            @include('layouts.slider')
-            <main class="py-4">
+           
+           
                 @yield('content')
-            </main>
+            
         </div>
     </div>
 
