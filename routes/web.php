@@ -3,24 +3,25 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\FrontendController;
+use App\Http\Controllers\Admin\BackendController;
 use App\Http\Controllers\Admin\ProductContoller;
+use App\Http\Controllers\Frontend\FrontendController;
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/admin',[AdminController::class,'index']);
+//Frontend route
+Route::get('/',[FrontendController::class,'index']);
+
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//Backend route
+Route::get('/admin',[AdminController::class,'index']);
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
 
-     Route::get('/dashboard',[FrontendController::class,'index'])->name('admin.dashboard');
+     Route::get('/dashboard',[BackendController::class,'index'])->name('admin.dashboard');
     //Category route
      Route::get('/add-category',[CategoryController::class,'addCategory'])->name('addCategory');
      Route::get('/all-category',[CategoryController::class,'allCategory'])->name('allCategory');
