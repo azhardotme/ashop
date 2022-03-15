@@ -18,6 +18,8 @@
     <!-- Styles -->
     <link href="{{ asset('frontend/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend/css/custom.css') }}" rel="stylesheet">
+    <link href="{{ asset('frontend/css/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('frontend/css/owl.theme.default.min.css') }}" rel="stylesheet">
 
 </head>
 <body>
@@ -83,6 +85,9 @@
     
     <script src="{{ asset('frontend/js/bootstrap.bundle.min.js') }}" defer></script>
     <script src="{{ asset('frontend/js/custom.js') }}" defer></script>
+    <script src="{{ asset('frontend/js/jquery-3.6.0.min.js') }}" defer></script>
+    <script src="{{ asset('frontend/js/owl.carousel.js') }}" defer></script>
+    <script src="{{ asset('frontend/js/owl.carousel.min.js') }}" defer></script>
  
     
     @if(session('status'))
@@ -91,6 +96,7 @@
         swal("{{session('status')}}");
     </script>
     @endif
-{{-- @yield('scripts') --}}
+    
+    @yield('scripts')
 </body>
 </html>
